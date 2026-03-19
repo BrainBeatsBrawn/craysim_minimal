@@ -1,0 +1,9 @@
+[submodule "extern/mathplot"]
+	path = extern/mathplot
+	url = https://github.com/sebsjames/mathplot
+[submodule "extern/oces_viewer"]
+	path = extern/oces_viewer
+	url = https://github.com/sebsjames/oces_viewer
+[submodule "extern/craysim"]
+	path = extern/craysim
+	url = https://github.com/sebsjames/craysim
