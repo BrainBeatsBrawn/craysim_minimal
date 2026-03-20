@@ -1,16 +1,20 @@
+#
+# craysim_minimal example CMakeLists.txt file. Use this as a template
+# for craysim based simulators.
+#
+
 cmake_minimum_required(VERSION 3.28.5 FATAL_ERROR)
 
 project(craysim_minimal LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-# FindOptiX.cmake lives in CMake/
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake" ${CMAKE_MODULE_PATH})
+# The file FindOptiX.cmake is provided by craysim
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/CMake" ${CMAKE_MODULE_PATH})
 
-# Locate the NVRT distribution.  Search the SDK first, then look in the system.
-set(OptiX_INSTALL_DIR "${CMAKE_SOURCE_DIR}/../" CACHE PATH "Path to OptiX installed location.")
+# Path to the NVidia OptiX SDK directory e.g. ~/src/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64
+set(OptiX_INSTALL_DIR "${PROJECT_SOURCE_DIR}/../" CACHE PATH "Path to OptiX installed location.")
 
 # Find the libraries which will be needed in addition to compound-ray (libEyeRenderer3.so)
 find_package(glfw3 3.2...3.4 REQUIRED)
