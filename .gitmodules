@@ -13,6 +13,3 @@
 [submodule "extern/tinygltf"]
 	path = extern/tinygltf
 	url = https://github.com/sebsjames/tinygltf
-[submodule "extern/args"]
-	path = extern/args
-	url = https://github.com/Taywee/args
