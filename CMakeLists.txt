@@ -10,6 +10,15 @@ project(craysim_minimal LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# It appears to be critical to set this for some component of the model. Without it, I see an error like:
+# craysim_minimal: /home/seb/src/craysim_minimal/extern/tinygltf/tiny_gltf.h:347: \
+#  const Value &tinygltf::Value::Get(const std::string &) const: Assertion `IsObject()' failed.
+# Aborted (core dumped)
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Release"
+    CACHE STRING "Choose build type from: Debug Release RelWithDebInfo MinSizeRel." FORCE)
+endif(NOT CMAKE_BUILD_TYPE)
+
 # The file FindOptiX.cmake is provided by craysim
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/CMake" ${CMAKE_MODULE_PATH})
 
