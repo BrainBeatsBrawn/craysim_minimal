@@ -19,6 +19,8 @@ std::int32_t main (std::int32_t argc, char* argv[])
     craysim::visual<glver> v (2000, 2000, "Compound-ray sim", gltf_path, h5_path, opts);
     // Find the model from the glTF that you want to be the landscape, then set it up
     v.find_landscape ("Landscape.003");
+    v.set_hoverheight (hovh, 0.15f);
+    v.speed = 3.0f; // Affects the speed of key movements
     v.setup_landscape();
     // Enable random walking. n_steps, a_tau, kappa are the params
     v.setup_random_walk (1500, 150, 100);
