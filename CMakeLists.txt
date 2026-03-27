@@ -102,6 +102,7 @@ set(MY_MODULES
   ${CRAYSIM_MODULE_PATH}/modules/craysim_visual.cppm
   ${CRAYSIM_MODULE_PATH}/modules/craysim_random_walk.cppm # Uses tk_spline, GPL v2
   ${CRAYSIM_MODULE_PATH}/modules/craysim_antbody.cppm
+  ${MATHS_MODULE_PATH}/sm/config.cppm
 )
 # The OCES reader code
 set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader)
