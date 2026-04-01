@@ -20,8 +20,8 @@ std::int32_t main (std::int32_t argc, char* argv[])
     v.set_hoverheight (prog_opts.hovh, 0.15f);
     v.kcmd_speed = 3.0f; // Affects the speed of key movements
     v.setup_landscape();
-    // Enable random walking. n_steps, a_tau, kappa are the params
-    v.setup_random_walk (1500, 150, 100);
+    // Enable random walking. n_steps, a_tau, kappa, a_max are the params
+    v.setup_random_walk (1500u, 150u, 100.0f, 0.05f);
 
     // The main program loop
     while (!v.readyToFinish()) {
