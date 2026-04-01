@@ -6,7 +6,7 @@
 	url = https://github.com/sebsjames/oces_viewer
 [submodule "extern/craysim"]
 	path = extern/craysim
-	url = https://github.com/sebsjames/craysim
+	url = git@github.com:sebsjames/craysim
 [submodule "extern/maths"]
 	path = extern/maths
 	url = https://github.com/sebsjames/maths
