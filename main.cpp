@@ -11,16 +11,14 @@ constexpr std::int32_t glver = mplot::gl::version_4_3;
 std::int32_t main (std::int32_t argc, char* argv[])
 {
     // craysim-common options parsing
-    sm::flags<craysim::options> opts;
-    auto[gltf_path, csv_path, h5_path, hovh] = craysim::parse_inputs (argc, argv, opts);
-    // Perhaps we printed options help and can now exit
-    if (opts.test (craysim::options::can_exit)) { return 1; }
+    craysim::parsed_inputs prog_opts = craysim::parse_inputs (argc, argv);
+    if (prog_opts.opts.test (craysim::options::can_exit)) { return 1; }
     // Create a craysim main window to render the eye/sensor. This loads in the models from gltf file at path
-    craysim::visual<glver> v (2000, 2000, "Compound-ray sim", gltf_path, h5_path, opts);
+    craysim::visual<glver> v (2000, 2000, "Compound-ray sim", prog_opts);
     // Find the model from the glTF that you want to be the landscape, then set it up
     v.find_landscape ("Landscape.003");
-    v.set_hoverheight (hovh, 0.15f);
-    v.speed = 3.0f; // Affects the speed of key movements
+    v.set_hoverheight (prog_opts.hovh, 0.15f);
+    v.kcmd_speed = 3.0f; // Affects the speed of key movements
     v.setup_landscape();
     // Enable random walking. n_steps, a_tau, kappa are the params
     v.setup_random_walk (1500, 150, 100);
