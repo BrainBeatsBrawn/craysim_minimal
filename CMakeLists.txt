@@ -19,7 +19,7 @@ if(NOT CMAKE_BUILD_TYPE)
     CACHE STRING "Choose build type from: Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# The file FindOptiX.cmake is provided by craysim
+# The file FindOptiX.cmake is provided by craysim, and also module_definitions.cmake
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/cmake" ${CMAKE_MODULE_PATH})
 
 # Path to the NVidia OptiX SDK directory e.g. ~/src/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64
@@ -90,91 +90,31 @@ include_directories ("${PROJECT_SOURCE_DIR}/extern")
 #
 # Define lists of module files to build
 #
+# We obtain module variable definitions from some of our dependencies
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/mathplot/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/maths/cmake" ${CMAKE_MODULE_PATH})
+
+# Include maths module defs
+include(${PROJECT_SOURCE_DIR}/extern/maths/cmake/module_definitions.cmake)
+setup_module_variables_for_maths (${PROJECT_SOURCE_DIR}/extern/maths)
+# Include mathplot module defs
+include(${PROJECT_SOURCE_DIR}/extern/mathplot/cmake/module_definitions.cmake)
+setup_module_variables_for_mathplot_maths (${PROJECT_SOURCE_DIR}/extern/maths)
+setup_module_variables_for_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot)
+# craysim module defs
+include(${PROJECT_SOURCE_DIR}/extern/craysim/cmake/module_definitions.cmake)
+setup_module_variables_for_craysim_maths (${PROJECT_SOURCE_DIR}/extern/maths)
+setup_module_variables_for_craysim_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot)
+setup_module_variables_for_craysim (${PROJECT_SOURCE_DIR}/extern/craysim)
 
 set(EXTERN_DIR ${PROJECT_SOURCE_DIR}/extern)
 set(OCES_MODULE_PATH ${EXTERN_DIR}/oces_viewer)
-set(CRAYSIM_MODULE_PATH ${EXTERN_DIR}/craysim)
-set(MATHS_MODULE_PATH ${EXTERN_DIR}/maths)
 
-# Modules in this repo
-set(MY_MODULES
-  ${CRAYSIM_MODULE_PATH}/modules/tk_spline.cppm           # GPL v2
-  ${CRAYSIM_MODULE_PATH}/modules/craysim_visual.cppm
-  ${CRAYSIM_MODULE_PATH}/modules/craysim_random_walk.cppm # Uses tk_spline, GPL v2
-  ${CRAYSIM_MODULE_PATH}/modules/craysim_antbody.cppm
-  ${MATHS_MODULE_PATH}/sm/config.cppm
-)
+#set(CRAYSIM_MODULE_PATH ${EXTERN_DIR}/craysim)
+#set(MATHS_MODULE_PATH ${EXTERN_DIR}/maths)
+
 # The OCES reader code
 set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader)
-# sebsjames/maths
-set(MATHS_CORE_MODULES
-  ${MATHS_MODULE_PATH}/sm/mathconst.cppm
-  ${MATHS_MODULE_PATH}/sm/constexpr_math.cppm
-  ${MATHS_MODULE_PATH}/sm/polysolve.cppm
-  ${MATHS_MODULE_PATH}/sm/bessel_i0.cppm
-  ${MATHS_MODULE_PATH}/sm/trait_tests.cppm
-  ${MATHS_MODULE_PATH}/sm/range.cppm
-  ${MATHS_MODULE_PATH}/sm/random.cppm
-  ${MATHS_MODULE_PATH}/sm/vec.cppm
-  ${MATHS_MODULE_PATH}/sm/vvec.cppm
-  ${MATHS_MODULE_PATH}/sm/quaternion.cppm
-  ${MATHS_MODULE_PATH}/sm/mat.cppm
-)
-set(MATHS_MATHPLOT_MODULES
-  ${MATHS_MODULE_PATH}/sm/scale.cppm
-  ${MATHS_MODULE_PATH}/sm/hdfdata.cppm
-  ${MATHS_MODULE_PATH}/sm/winder.cppm
-  ${MATHS_MODULE_PATH}/sm/grid.cppm
-  ${MATHS_MODULE_PATH}/sm/algo.cppm
-  ${MATHS_MODULE_PATH}/sm/histo.cppm
-  ${MATHS_MODULE_PATH}/sm/geometry.cppm
-  ${MATHS_MODULE_PATH}/sm/geometry_polyhedra.cppm
-  ${MATHS_MODULE_PATH}/sm/flags.cppm
-  ${MATHS_MODULE_PATH}/sm/centroid.cppm
-  ${MATHS_MODULE_PATH}/sm/util.cppm
-  ${MATHS_MODULE_PATH}/sm/base64.cppm
-  ${MATHS_MODULE_PATH}/sm/crc32.cppm
-)
-# sebsjames/mathplot
-set(MATHPLOT_CORE_MODULES
-  ${MPLOT_INCLUDE_PATH}/mplot/fps/profiler.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualOwnable.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/Visual.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualGlfw.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualFace.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/TextFeatures.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/TextGeometry.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualResources.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualCommon.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualFont.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualTextModel.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualModel.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VisualDataModel.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/NavMesh.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/ColourMap.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/colourmaps_cet.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/colourmaps_crameri.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/ColourMap_Lists.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/CoordArrows.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/win_t.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/colour.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/tools.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/unicode.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/loadpng.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/gl/version.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/gl/util_mx.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/graphing.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/graphstyles.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/DatasetStyle.cppm
-)
-set(CRAYSIM_VM_MODULES
-  ${MPLOT_INCLUDE_PATH}/mplot/compoundray/interop.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/compoundray/Ommatidium.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/compoundray/EyeVisual.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/VerticesVisual.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/NormalsVisual.cppm
-  ${MPLOT_INCLUDE_PATH}/mplot/InstancedScatterVisual.cppm
-)
 
 #
 # Compile craysim_minimal program
@@ -182,15 +122,19 @@ set(CRAYSIM_VM_MODULES
 
 # All the modules that are going to be built for this executable:
 set(CRAYSIM_MINIMAL_MODULES
-  ${MY_MODULES}
+  ${MPLOT_MATHS_CORE_MODULES}
+  ${MPLOT_MATHS_VISUALMODEL_MODULES}
+  ${MPLOT_CORE_MODULES}
+  ${CRAYSIM_MATHS_MODULES}
+  ${CRAYSIM_MATHPLOT_MODULES}
+  ${CRAYSIM_MODULES}
   ${OCES_MODULES}
-  ${MATHS_CORE_MODULES}
-  ${MATHS_MATHPLOT_MODULES}
-  ${MATHPLOT_CORE_MODULES}
-  ${CRAYSIM_VM_MODULES}
 )
-# We set the language to C++ for each module file as they may not have a .cppm or .ixx file suffix
+# We set the language to C++ for each module file as they may not all have a .cppm or .ixx file suffix
 set_source_files_properties (${CRAYSIM_MINIMAL_MODULES} PROPERTIES LANGUAGE CXX)
+
+# Remove any module duplicates from CRAYSIM_MINIMAL_MODULES
+list(REMOVE_DUPLICATES CRAYSIM_MINIMAL_MODULES)
 
 # For mathplot, we must build the glad library here
 add_library(glad STATIC ${MPLOT_INCLUDE_PATH}/mplot/glad/gl.c)
