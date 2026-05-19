@@ -1,14 +1,12 @@
-#include <cstdint>
-#include <tuple>
 import sm.flags;
 import sm.vvec;
 import mplot.gl.version;
 import craysim.visual;
 
 // With craysim, we must specify OpenGL 4.3 to enable Instanced VisualModels (sorry Mac users)
-constexpr std::int32_t glver = mplot::gl::version_4_3;
+constexpr int glver = mplot::gl::version_4_3;
 
-std::int32_t main (std::int32_t argc, char* argv[])
+int main (int argc, char* argv[])
 {
     // craysim-common options parsing
     craysim::parsed_inputs prog_opts = craysim::parse_inputs (argc, argv);
