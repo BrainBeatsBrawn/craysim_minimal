@@ -20,7 +20,7 @@ sudo apt install build-essential cmake git ninja-build \
                  libxi-dev libglfw3-dev libfreetype-dev libhdf5-dev
 ```
 
-To compile craysim_minimal, you need to use clang-22 or higher. I compiled it from source.
+To compile craysim_minimal, you need to use clang-20 or higher. I compiled it from source.
 
 You also need cmake version 3.28.5 or higher. Either `apt install cmake`
 on Ubuntu 25+ or download and build cmake from the cmake.org download
