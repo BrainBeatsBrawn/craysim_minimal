@@ -4,6 +4,9 @@ The most minimal craysim program I could write.
 Opens a simple 3D world (data/natural_env.gltf), with a spherical compound-ray camera (data/eyes/poly.eye).
 Allows you to move around on the landscape (w-a-s-d keys, see also Ctrl-h).
 
+![Craysim_minimal in action](https://github.com/BrainBeatsBrawn/craysim_minimal/blob/main/data/Compound-ray_sim.png?raw=true)
+
+
 ## Prerequisites
 
 Before compiling craysim_minimal, obtain and compile NVidia Optix 8.0 and obtain,
