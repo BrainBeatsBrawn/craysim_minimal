@@ -1,6 +1,6 @@
 # craysim_minimal
 
-The most minimal craysim program I could write.
+The most minimal craysim program I could write (~30 lines of code).
 Opens a simple 3D world (data/natural_env.gltf), with a spherical compound-ray camera (data/eyes/poly.eye).
 Allows you to move around on the landscape (w-a-s-d keys, see also Ctrl-h). The spherical eye leaves a little trail of yellow breadcrumbs showing you where it has been.
 
