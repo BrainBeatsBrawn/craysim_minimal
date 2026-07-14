@@ -17,6 +17,7 @@ int main (int argc, char* argv[])
     v.kcmd_speed = 3.0f; // Affects the speed of key movements
     v.setup_landscape();
     v.setup_random_walk (1500u, 150u, 100.0f, 0.05f); // Params: n_steps, a_tau, kappa, a_max
+    v.sim_opts.set (craysim::options::breadcrumbs_keymv, true); // Turn on breadcrumbs for key based movements
 
     // The main program loop
     while (!v.readyToFinish()) {
