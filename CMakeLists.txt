@@ -88,7 +88,7 @@ include_directories("${OptiX_INCLUDE}")
 include_directories ("${PROJECT_SOURCE_DIR}/extern")
 
 # allows #include <nlohmann/json.hpp> (sm::config dependency)
-include_directories ("${PROJECT_SOURCE_DIR}/extern/maths/json/include")
+include_directories ("${PROJECT_SOURCE_DIR}/extern/json/include")
 
 #
 # Define lists of module files to build
@@ -99,14 +99,14 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/maths/cmake" ${CMAKE_MODULE_
 
 # Include maths module defs
 include(${PROJECT_SOURCE_DIR}/extern/maths/cmake/module_definitions.cmake)
-setup_module_variables_for_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/maths/json)
+setup_module_variables_for_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/json)
 # Include mathplot module defs
 include(${PROJECT_SOURCE_DIR}/extern/mathplot/cmake/module_definitions.cmake)
 setup_module_variables_for_mathplot_maths (${PROJECT_SOURCE_DIR}/extern/maths)
-setup_module_variables_for_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot)
+setup_module_variables_for_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot ${PROJECT_SOURCE_DIR}/extern/json)
 # craysim module defs
 include(${PROJECT_SOURCE_DIR}/extern/craysim/cmake/module_definitions.cmake)
-setup_module_variables_for_craysim_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/maths/json)
+setup_module_variables_for_craysim_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/json)
 setup_module_variables_for_craysim_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot)
 setup_module_variables_for_craysim (${PROJECT_SOURCE_DIR}/extern/craysim)
 
