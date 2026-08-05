@@ -94,19 +94,6 @@ include_directories ("${PROJECT_SOURCE_DIR}/extern/json/include")
 # Define lists of module files to build
 #
 
-# Include maths module defs
-include(${PROJECT_SOURCE_DIR}/extern/maths/cmake/module_definitions.cmake)
-setup_module_variables_for_maths (
-  ${PROJECT_SOURCE_DIR}/extern/maths
-  ${PROJECT_SOURCE_DIR}/extern/json
-)
-# Include mathplot module defs
-include(${PROJECT_SOURCE_DIR}/extern/mathplot/cmake/module_definitions.cmake)
-setup_module_variables_for_mathplot (
-  ${PROJECT_SOURCE_DIR}/extern/mathplot
-  ${PROJECT_SOURCE_DIR}/extern/maths
-  ${PROJECT_SOURCE_DIR}/extern/json
-)
 # craysim module defs
 include(${PROJECT_SOURCE_DIR}/extern/craysim/cmake/module_definitions.cmake)
 setup_module_variables_for_craysim (
@@ -128,7 +115,6 @@ set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader.cppm)
 
 # All the modules that are going to be built for this executable:
 set(CRAYSIM_MINIMAL_MODULES
-  ${MPLOT_CORE_MODULES}
   ${CRAYSIM_MODULES}
   ${OCES_MODULES}
 )
