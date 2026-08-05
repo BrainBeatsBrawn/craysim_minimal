@@ -1,8 +1,6 @@
 #
-# craysim_minimal example CMakeLists.txt file. Use this as a template
-# for craysim based simulators.
+# craysim_minimal example CMakeLists.txt file. Use this as a template for craysim based simulators.
 #
-
 cmake_minimum_required(VERSION 3.28.5 FATAL_ERROR)
 
 project(craysim_minimal LANGUAGES CXX C)
@@ -39,10 +37,6 @@ set(MPLOT_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/extern/mathplot" CACHE PATH "The p
 
 # Assume a gcc compiler (or a gcc mimic like Clang). OpenGL 4.3 required so no Apple.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -g -O3 -Wno-unused-result -Wno-unknown-pragmas -Wfatal-errors")
-# Tell clang to be quiet about brace initialisers:
-if(CMAKE_CXX_COMPILER_ID MATCHES Clang)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-braces")
-endif()
 
 if(OpenMP_FOUND)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
@@ -79,9 +73,8 @@ include_directories(
 # Maths include path. Allows #include <sm/config> (the only non-modules maths header at the moment)
 include_directories(${PROJECT_SOURCE_DIR}/extern/maths)
 
-# Add the path to the OptiX headers to our include paths. This is
-# required to compile craysim.virtual, which includes compound-ray
-# headers, which refer to some OptiX data structures
+# Add the path to the OptiX headers to our include paths. This is required to compile craysim.visual,
+# which includes compound-ray headers, which refer to some OptiX data structures
 include_directories("${OptiX_INCLUDE}")
 
 # allows #include <tinygltf/tiny_gltf.h> (an oces dependency)
@@ -103,20 +96,14 @@ setup_module_variables_for_craysim (
   ${PROJECT_SOURCE_DIR}/extern/json
 )
 
-set(EXTERN_DIR ${PROJECT_SOURCE_DIR}/extern)
-set(OCES_MODULE_PATH ${EXTERN_DIR}/oces_viewer)
-
-# The OCES reader code
-set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader.cppm)
-
 #
 # Compile craysim_minimal program
 #
 
-# All the modules that are going to be built for this executable:
+# All the modules that are going to be built for this executable. The OCES reader module uses maths in the craysim modules.
 set(CRAYSIM_MINIMAL_MODULES
   ${CRAYSIM_MODULES}
-  ${OCES_MODULES}
+  ${PROJECT_SOURCE_DIR}/extern/oces_viewer/oces/reader.cppm
 )
 # We set the language to C++ for each module file as they may not all have a .cppm or .ixx file suffix
 set_source_files_properties (${CRAYSIM_MINIMAL_MODULES} PROPERTIES LANGUAGE CXX)
