@@ -19,7 +19,7 @@ if(NOT CMAKE_BUILD_TYPE)
     CACHE STRING "Choose build type from: Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-# The file FindOptiX.cmake is provided by craysim, and also module_definitions.cmake
+# The file FindOptiX.cmake is provided by craysim
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/cmake" ${CMAKE_MODULE_PATH})
 
 # Path to the NVidia OptiX SDK directory e.g. ~/src/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64
@@ -93,28 +93,31 @@ include_directories ("${PROJECT_SOURCE_DIR}/extern/json/include")
 #
 # Define lists of module files to build
 #
-# We obtain module variable definitions from some of our dependencies
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/mathplot/cmake" ${CMAKE_MODULE_PATH})
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/maths/cmake" ${CMAKE_MODULE_PATH})
 
 # Include maths module defs
 include(${PROJECT_SOURCE_DIR}/extern/maths/cmake/module_definitions.cmake)
-setup_module_variables_for_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/json)
+setup_module_variables_for_maths (
+  ${PROJECT_SOURCE_DIR}/extern/maths
+  ${PROJECT_SOURCE_DIR}/extern/json
+)
 # Include mathplot module defs
 include(${PROJECT_SOURCE_DIR}/extern/mathplot/cmake/module_definitions.cmake)
-setup_module_variables_for_mathplot_maths (${PROJECT_SOURCE_DIR}/extern/maths)
-setup_module_variables_for_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot ${PROJECT_SOURCE_DIR}/extern/json)
+setup_module_variables_for_mathplot (
+  ${PROJECT_SOURCE_DIR}/extern/mathplot
+  ${PROJECT_SOURCE_DIR}/extern/maths
+  ${PROJECT_SOURCE_DIR}/extern/json
+)
 # craysim module defs
 include(${PROJECT_SOURCE_DIR}/extern/craysim/cmake/module_definitions.cmake)
-setup_module_variables_for_craysim_maths (${PROJECT_SOURCE_DIR}/extern/maths ${PROJECT_SOURCE_DIR}/extern/json)
-setup_module_variables_for_craysim_mathplot (${PROJECT_SOURCE_DIR}/extern/mathplot)
-setup_module_variables_for_craysim (${PROJECT_SOURCE_DIR}/extern/craysim)
+setup_module_variables_for_craysim (
+  ${PROJECT_SOURCE_DIR}/extern/craysim
+  ${PROJECT_SOURCE_DIR}/extern/mathplot
+  ${PROJECT_SOURCE_DIR}/extern/maths
+  ${PROJECT_SOURCE_DIR}/extern/json
+)
 
 set(EXTERN_DIR ${PROJECT_SOURCE_DIR}/extern)
 set(OCES_MODULE_PATH ${EXTERN_DIR}/oces_viewer)
-
-#set(CRAYSIM_MODULE_PATH ${EXTERN_DIR}/craysim)
-#set(MATHS_MODULE_PATH ${EXTERN_DIR}/maths)
 
 # The OCES reader code
 set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader.cppm)
@@ -125,8 +128,6 @@ set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader.cppm)
 
 # All the modules that are going to be built for this executable:
 set(CRAYSIM_MINIMAL_MODULES
-  ${MPLOT_MATHS_CORE_MODULES}
-  ${MPLOT_MATHS_VISUALMODEL_MODULES}
   ${MPLOT_CORE_MODULES}
   ${CRAYSIM_MATHS_MODULES}
   ${CRAYSIM_MATHPLOT_MODULES}
@@ -138,7 +139,6 @@ set_source_files_properties (${CRAYSIM_MINIMAL_MODULES} PROPERTIES LANGUAGE CXX)
 
 # Remove any module duplicates from CRAYSIM_MINIMAL_MODULES
 list(REMOVE_DUPLICATES CRAYSIM_MINIMAL_MODULES)
-
 # For mathplot, we must build the glad library here
 add_library(glad STATIC ${MPLOT_INCLUDE_PATH}/mplot/glad/gl.c)
 
