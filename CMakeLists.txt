@@ -26,13 +26,13 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/cmake" ${CMAKE_MODUL
 set(OptiX_INSTALL_DIR "${PROJECT_SOURCE_DIR}/../" CACHE PATH "Path to OptiX installed location.")
 
 # Find the libraries which will be needed in addition to compound-ray (libEyeRenderer3.so)
-find_package(glfw3 3.2...3.4 REQUIRED)
-find_package(OpenGL)
+find_package(glfw3 3.2 REQUIRED)
+find_package(OpenGL REQUIRED)
 find_package(OpenMP) # (OpenMP may be used to build navmesh)
 find_package(Freetype REQUIRED)
 find_package(HDF5 REQUIRED)
 find_package(OptiX REQUIRED)
-find_package(compound-ray)
+find_package(compound-ray REQUIRED)
 
 # Where is mathplot? (allows headers and modules to be found)
 set(MPLOT_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/extern/mathplot" CACHE PATH "The path to mathplot")
@@ -129,8 +129,6 @@ set(OCES_MODULES ${OCES_MODULE_PATH}/oces/reader.cppm)
 # All the modules that are going to be built for this executable:
 set(CRAYSIM_MINIMAL_MODULES
   ${MPLOT_CORE_MODULES}
-  ${CRAYSIM_MATHS_MODULES}
-  ${CRAYSIM_MATHPLOT_MODULES}
   ${CRAYSIM_MODULES}
   ${OCES_MODULES}
 )
