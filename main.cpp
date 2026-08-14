@@ -12,9 +12,6 @@ int main (int argc, char* argv[])
     if (prog_opts.opts.test (craysim::options::can_exit)) { return 1; }
     // Create a craysim main window to render the eye/sensor. This loads in the models from the cmd-line specified gltf file
     craysim::visual<glver> v (2000, 2000, "Compound-ray sim", prog_opts);
-    // Default scene trans/rotation (your viewpoint)
-    v.setSceneTrans (sm::vec<float,3>{ float{0.01}, float{-3.7}, float{-99} });
-    v.setSceneRotation (sm::quaternion<float>{ float{0.93}, float{0.16}, float{-0.32}, float{-0.056} });
     v.find_landscape ("Landscape.003,Ground"); // Find the model "Landscape.003" from the glTF and load it as the landscape
     v.set_hoverheight (prog_opts.hovh, 0.15f);
     v.kcmd_speed = 3.0f; // Affects the speed of key movements
