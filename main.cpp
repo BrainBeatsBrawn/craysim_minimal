@@ -19,11 +19,6 @@ int main (int argc, char* argv[])
     v.setup_random_walk (1500u, 150u, 100.0f, 0.05f); // Params: n_steps, a_tau, kappa, a_max
     v.sim_opts.set (craysim::options::breadcrumbs_keymv, true); // Turn on breadcrumbs for key based movements
 
-    // For testing
-    v.sim_opts.set (craysim::options::show_fps, false); // find/vis collisions has impact on fps when enabled
-    v.sim_opts.set (craysim::options::find_collisions, true);
-    v.sim_opts.set (craysim::options::visualize_collisions, true);
-
     // The main program loop
     while (!v.readyToFinish()) {
         v.start_loop_timer(); // It's important to call this line at the start of the loop
