@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.28.5 FATAL_ERROR)
 
 project(craysim_minimal LANGUAGES CXX C)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # It appears to be critical to set this for some component of the model. Without it, I see an error like:
