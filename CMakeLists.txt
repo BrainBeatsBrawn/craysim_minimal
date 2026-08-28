@@ -102,6 +102,13 @@ setup_module_variables_for_craysim (
   ${PROJECT_SOURCE_DIR}/extern/json
 )
 
+# OCES module defs
+include(${PROJECT_SOURCE_DIR}/extern/oces_viewer/cmake/module_definitions.cmake)
+setup_module_variables_for_oces_viewer (
+  ${PROJECT_SOURCE_DIR}/extern/oces_viewer
+  ${PROJECT_SOURCE_DIR}/extern/maths
+)
+
 #
 # Compile craysim_minimal program
 #
@@ -109,7 +116,7 @@ setup_module_variables_for_craysim (
 # All the modules that are going to be built for this executable. The OCES reader module uses maths in the craysim modules.
 set(CRAYSIM_MINIMAL_MODULES
   ${CRAYSIM_MODULES}
-  ${PROJECT_SOURCE_DIR}/extern/oces_viewer/oces/reader.cppm
+  ${OCES_READER_MODULES}
 )
 # We set the language to C++ for each module file as they may not all have a .cppm or .ixx file suffix
 set_source_files_properties (${CRAYSIM_MINIMAL_MODULES} PROPERTIES LANGUAGE CXX)
