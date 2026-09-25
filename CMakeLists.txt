@@ -137,7 +137,7 @@ target_sources(craysim_minimal
   FILES ${CRAYSIM_MINIMAL_MODULES}
 )
 target_link_libraries(craysim_minimal
-  compound-ray::EyeRenderer3
+  compound-ray::compoundray
   ${HDF5_C_LIBRARIES}
   ${GLFW_LIB_NAME}
   Freetype::Freetype
