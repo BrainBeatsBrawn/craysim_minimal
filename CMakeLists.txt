@@ -23,14 +23,14 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/extern/craysim/cmake" ${CMAKE_MODUL
 # Path to the NVidia OptiX SDK directory e.g. ~/src/NVIDIA-OptiX-SDK-8.0.0-linux64-x86_64
 set(OptiX_INSTALL_DIR "${PROJECT_SOURCE_DIR}/../" CACHE PATH "Path to OptiX installed location.")
 
-# Find the libraries which will be needed in addition to compound-ray (libEyeRenderer3.so)
+# Find the libraries which will be needed in addition to libcompoundray.so
 find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(OpenMP) # (OpenMP may be used to build navmesh)
 find_package(Freetype REQUIRED)
 find_package(HDF5 REQUIRED)
 find_package(OptiX REQUIRED)
-find_package(compound-ray REQUIRED)
+find_package(compoundray REQUIRED)
 
 # Where is mathplot? (allows headers and modules to be found)
 set(MPLOT_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/extern/mathplot" CACHE PATH "The path to mathplot")
@@ -74,7 +74,7 @@ include_directories(
 include_directories(${PROJECT_SOURCE_DIR}/extern/maths)
 
 # Add the path to the OptiX headers to our include paths. This is required to compile craysim.visual,
-# which includes compound-ray headers, which refer to some OptiX data structures
+# which includes compoundray headers, which refer to some OptiX data structures
 include_directories("${OptiX_INCLUDE}")
 
 # allows #include <tinygltf/tiny_gltf.h> (an oces dependency)
@@ -137,7 +137,7 @@ target_sources(craysim_minimal
   FILES ${CRAYSIM_MINIMAL_MODULES}
 )
 target_link_libraries(craysim_minimal
-  compound-ray::EyeRenderer3
+  compoundray::compoundray
   ${HDF5_C_LIBRARIES}
   ${GLFW_LIB_NAME}
   Freetype::Freetype
