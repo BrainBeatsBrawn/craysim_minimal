@@ -60,5 +60,14 @@ Now you can run the program
 ./build/craysim_minimal -f ./data/natural_env.gltf
 ```
 
+This loads the default compound-ray eye 'poly.eye' from data/eyes/poly.eye. poly.eye is encoded in natural_env.gltf.
+
+You can override the compound-ray eye by passing an additional argument:
+
+```bash
+./build/craysim_minimal -f ./data/natural_env.gltf -C data/eyes/cyl.eye
+./build/craysim_minimal -f ./data/natural_env.gltf -C data/eyes/foveated.eye
+```
+
 Author: Seb James
 Date: March 2026
