@@ -16,3 +16,6 @@
 [submodule "extern/json"]
 	path = extern/json
 	url = https://github.com/nlohmann/json
+[submodule "extern/maths_config"]
+	path = extern/maths_config
+	url = https://github.com/sebsjames/maths_config

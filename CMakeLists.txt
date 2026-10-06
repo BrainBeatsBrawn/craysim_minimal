@@ -99,6 +99,7 @@ setup_module_variables_for_craysim (
   ${PROJECT_SOURCE_DIR}/extern/craysim
   ${PROJECT_SOURCE_DIR}/extern/mathplot
   ${PROJECT_SOURCE_DIR}/extern/maths
+  ${PROJECT_SOURCE_DIR}/extern/maths_config
   ${PROJECT_SOURCE_DIR}/extern/json
 )
 
