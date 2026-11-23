@@ -108,6 +108,7 @@ include(${PROJECT_SOURCE_DIR}/extern/oces_viewer/cmake/module_definitions.cmake)
 setup_module_variables_for_oces_viewer (
   ${PROJECT_SOURCE_DIR}/extern/oces_viewer
   ${PROJECT_SOURCE_DIR}/extern/maths
+  ${PROJECT_SOURCE_DIR}/extern/maths_hdf
 )
 
 #
